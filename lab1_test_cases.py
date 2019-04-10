@@ -9,6 +9,9 @@ class TestLab1(unittest.TestCase):
         tlist = None
         with self.assertRaises(ValueError):  # used to check for exception
             max_list_iter(tlist)
+        # test that a none list argument raises a ValueError
+        with self.assertRaises(ValueError):
+            max_list_iter(34)
          #test a max found at end of list
         self.assertEqual(max_list_iter([0, 1, 2, 5, 3, 7]), 7)
          #test a max found at start of list
@@ -20,6 +23,9 @@ class TestLab1(unittest.TestCase):
 
     def test_reverse_rec(self):
         """Return the list reversed recursively"""
+        # test the raised value error when non list is passed in
+        with self.assertRaises(ValueError):
+            reverse_rec(34)
          #normal reversed list
         self.assertEqual(reverse_rec([1,2,3]),[3,2,1])
          #list of size 1 reveresed
@@ -32,6 +38,9 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(reverse_rec([1, 2, 3, 4]), [4, 3, 2, 1])
 
     def test_bin_search(self):
+        # test a raised value error when a non list is passed in
+        with self.assertRaises(ValueError):
+            bin_search("cats are cool", 0, 3, 4)
         list_val =[0,1,2,3,4,7,8,9,10]
         low = 0
         high = len(list_val)-1
@@ -51,6 +60,10 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(bin_search(0, 0, len(list_val) - 1, list_val), 0)
          #return none when the value is not found
         self.assertEqual(bin_search(13, 0, len(list_val) - 1, list_val), None)
+        #test the high of a 3 item list being the target
+        self.assertEqual(bin_search(4, 0, 2, [2, 3, 4]), 2)
+        #test the low of a 3 item list being the target
+        self.assertEqual(bin_search(2, 0, 2, [2, 3, 4]), 0)
 
 if __name__ == "__main__":
         unittest.main()
